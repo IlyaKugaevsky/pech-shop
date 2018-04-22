@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PechShop.Data;
 using PechShop.Models;
+using PechShop.ViewModels;
 
 namespace PechShop.Controllers
 {
@@ -55,9 +56,14 @@ namespace PechShop.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var customers = await _context.Customers.ToListAsync();
+            var products = await _context.Products.ToListAsync();
+
+            var viewModel = new OrderViewModel(customers, products);
+
+            return View(viewModel);
         }
 
         // POST: Orders/Create
@@ -65,15 +71,24 @@ namespace PechShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductId,CustomerId,ProductsNumber,Date")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,SelectedProductId, SelectedCustomerId, ProductsNumber")] OrderViewModel orderViewModel)
         {
             if (ModelState.IsValid)
             {
+                var order = new Order()
+                {
+                    CustomerId = orderViewModel.SelectedCustomerId,
+                    ProductId = orderViewModel.SelectedProductId,
+                    ProductsNumber = orderViewModel.ProductsNumber,
+                    Date = DateTime.Now
+                };
+
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            return View(orderViewModel);
         }
 
         // GET: Orders/Edit/5
@@ -85,11 +100,18 @@ namespace PechShop.Controllers
             }
 
             var order = await _context.Orders.SingleOrDefaultAsync(m => m.Id == id);
+
             if (order == null)
             {
                 return NotFound();
             }
-            return View(order);
+
+            var customers = await _context.Customers.ToListAsync();
+            var products = await _context.Products.ToListAsync();
+
+            var viewModel = new OrderViewModel(customers, products, order);
+
+            return View(viewModel);
         }
 
         // POST: Orders/Edit/5

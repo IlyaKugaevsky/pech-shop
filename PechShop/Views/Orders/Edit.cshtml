@@ -1,4 +1,4 @@
-﻿@model PechShop.Models.Order
+﻿@model PechShop.ViewModels.OrderViewModel
 
 <h2>Редактировать</h2>
 
@@ -8,12 +8,25 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="OrderId" />
             <div class="form-group">
                 <label asp-for="ProductsNumber" class="control-label"></label>
                 <input asp-for="ProductsNumber" class="form-control" />
                 <span asp-validation-for="ProductsNumber" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="SelectedCustomerId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SelectedCustomerId, Model.CustomerList, new {@class="form-control" })
+                <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="SelectedProductId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SelectedProductId, Model.ProductList, new {@class="form-control" })
+                <span asp-validation-for="SelectedProductId" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-success" />
             </div>

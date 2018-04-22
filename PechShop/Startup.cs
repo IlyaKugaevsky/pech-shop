@@ -26,8 +26,11 @@ namespace PechShop
         {
             services.AddMvc();
 
+            //services.AddDbContext<PechShopContext>(options =>
+            //        options.UseSqlite("Data Source=pech_shop.db"));
+
             services.AddDbContext<PechShopContext>(options =>
-                    options.UseSqlite("Data Source=pech_shop.db"));
+                options.UseInMemoryDatabase("database"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

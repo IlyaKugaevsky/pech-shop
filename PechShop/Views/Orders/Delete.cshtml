@@ -1,0 +1,34 @@
+﻿@model PechShop.Models.Order
+
+<h3>Подтвердить удаление</h3>
+
+<div>
+    <h4>Заказ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductsNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductsNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <a class="btn btn-default" asp-action="Index">Назад к списку заказов</a> |
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+    </form>
+</div>

@@ -23,5 +23,7 @@ namespace PechShop.Models
         public string AdditionalInfo { get; set; }
 
         public List<Order> Orders;
+
+        public string GetFullName() => string.Join(' ', FirstName, LastName);
     }
 }

@@ -18,23 +18,14 @@ namespace PechShop.Controllers
         public OrdersController(PechShopContext context)
         {
             _context = context;
-
-            //var order = new Order()
-            //{
-            //    CustomerId = 1,
-            //    ProductId = 1,
-            //    Date = DateTime.Now,
-            //    ProductsNumber = 5
-            //};
-
-            //_context.Add(order);
-            //_context.SaveChanges();
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            var orders = await _context.Orders.Include(o => o.Customer).Include(o => o.Product).ToListAsync();
+            var viewModels = orders.Select(o => new OrderViewModel(o)).ToList();
+            return View(viewModels);
         }
 
         // GET: Orders/Details/5
@@ -61,7 +52,7 @@ namespace PechShop.Controllers
             var customers = await _context.Customers.ToListAsync();
             var products = await _context.Products.ToListAsync();
 
-            var viewModel = new OrderViewModel(customers, products);
+            var viewModel = new OrderToUpdateViewModel(customers, products);
 
             return View(viewModel);
         }
@@ -71,16 +62,16 @@ namespace PechShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SelectedProductId, SelectedCustomerId, ProductsNumber")] OrderViewModel orderViewModel)
+        public async Task<IActionResult> Create([Bind("Id,SelectedProductId, SelectedCustomerId, ProductsNumber")] OrderToUpdateViewModel orderToUpdateViewModel)
         {
             if (ModelState.IsValid)
             {
                 var order = new Order()
                 {
-                    CustomerId = orderViewModel.SelectedCustomerId,
-                    ProductId = orderViewModel.SelectedProductId,
-                    ProductsNumber = orderViewModel.ProductsNumber,
-                    Date = DateTime.Now
+                    CustomerId = orderToUpdateViewModel.SelectedCustomerId,
+                    ProductId = orderToUpdateViewModel.SelectedProductId,
+                    ProductsNumber = orderToUpdateViewModel.ProductsNumber,
+                    Date = DateTime.Now.ToLocalTime()
                 };
 
 
@@ -88,7 +79,7 @@ namespace PechShop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderViewModel);
+            return View(orderToUpdateViewModel);
         }
 
         // GET: Orders/Edit/5
@@ -109,7 +100,7 @@ namespace PechShop.Controllers
             var customers = await _context.Customers.ToListAsync();
             var products = await _context.Products.ToListAsync();
 
-            var viewModel = new OrderViewModel(customers, products, order);
+            var viewModel = new OrderToUpdateViewModel(customers, products, order);
 
             return View(viewModel);
         }

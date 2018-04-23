@@ -12,6 +12,7 @@ namespace PechShop.Heplers
         public static DateTime GetCurrent()
         {
             var easternTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(_novosibirskTimeZoneId);
+
             var currentTime = DateTime.Now;
             var dateTimeWithZone = new DateTimeWithZone(currentTime, easternTimeZoneInfo);
 

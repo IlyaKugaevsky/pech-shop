@@ -72,7 +72,7 @@ namespace PechShop.Controllers
                     CustomerId = orderToUpdateViewModel.SelectedCustomerId,
                     ProductId = orderToUpdateViewModel.SelectedProductId,
                     ProductsNumber = orderToUpdateViewModel.ProductsNumber,
-                    Date = NovosibirskTime.GetCurrent()
+                    Date = DateTime.Now
                 };
 
 

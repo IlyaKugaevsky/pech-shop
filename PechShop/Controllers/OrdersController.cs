@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PechShop.Data;
 using PechShop.Models;
 using PechShop.ViewModels;
+using PechShop.Heplers;
 
 namespace PechShop.Controllers
 {
@@ -71,7 +72,7 @@ namespace PechShop.Controllers
                     CustomerId = orderToUpdateViewModel.SelectedCustomerId,
                     ProductId = orderToUpdateViewModel.SelectedProductId,
                     ProductsNumber = orderToUpdateViewModel.ProductsNumber,
-                    Date = DateTime.Now.ToLocalTime()
+                    Date = NovosibirskTime.GetCurrent()
                 };
 
 
@@ -137,7 +138,10 @@ namespace PechShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            else
+            {
+                return RedirectToAction(nameof(Edit), order.Id);
+            }
         }
 
         // GET: Orders/Delete/5

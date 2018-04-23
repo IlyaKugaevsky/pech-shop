@@ -11,11 +11,14 @@ namespace PechShop.ViewModels
         public CustomerOrdersViewModel(CustomerViewModel customer, IEnumerable<Order> orders)
         {
             FullName = customer.GetFullName();
-            Orders = orders.Select(o => new OrderViewModel(o)).ToList();
+            Orders = orders.Select(o => new DetailedOrderByCustomerViewModel(o)).ToList();
+
+            TotalOrderedSum = Orders.Select(o => o.TotalOrderedSum).Sum();
         }
 
         public string FullName { get; set; }
+        public decimal TotalOrderedSum { get; set; }
 
-        public List<OrderViewModel> Orders { get; set; }
+        public List<DetailedOrderByCustomerViewModel> Orders { get; set; }
     }
 }

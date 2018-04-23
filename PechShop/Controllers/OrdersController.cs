@@ -67,17 +67,34 @@ namespace PechShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var order = new Order()
-                {
-                    CustomerId = orderToUpdateViewModel.SelectedCustomerId,
-                    ProductId = orderToUpdateViewModel.SelectedProductId,
-                    ProductsNumber = orderToUpdateViewModel.ProductsNumber,
-                    Date = DateTime.Now
-                };
+                var productId = orderToUpdateViewModel.SelectedProductId;
+                var customerId = orderToUpdateViewModel.SelectedCustomerId;
+                var productsNumber = orderToUpdateViewModel.ProductsNumber;
+                var dateTime = DateTime.Now;
 
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var duplicateOrder = await _context.FindDuplicateOrder(productId, customerId);
+
+                if (duplicateOrder == null)
+                {
+                    var order = new Order()
+                    {
+                        CustomerId = customerId,
+                        ProductId = productId,
+                        ProductsNumber = productsNumber,
+                        Date = dateTime
+                    };
+
+                    _context.Add(order);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    duplicateOrder.ProductsNumber += productsNumber;
+                    duplicateOrder.Date = dateTime;
+                    await _context.SaveChangesAsync();
+                }
+
+                return RedirectToAction("Index");
             }
             return View(orderToUpdateViewModel);
         }
@@ -99,7 +116,6 @@ namespace PechShop.Controllers
 
             var customers = await _context.Customers.ToListAsync();
             var products = await _context.Products.ToListAsync();
-
             var viewModel = new OrderToUpdateViewModel(customers, products, order);
 
             return View(viewModel);

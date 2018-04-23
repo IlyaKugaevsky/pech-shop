@@ -20,7 +20,7 @@ namespace PechShop.ViewModels
             Price = product.Price;
             MinimalNumber = product.MinimalNumber;
             Url = product.Url;
-            TransportatoinCost = product.TransportatoinCost;
+            TransportationCost = product.TransportatoinCost;
             AdditionalInfo = product.AdditionalInfo;
             TotalOrderedNumber = totalOrderedNumber;
             RemainNumber = remainNumber;
@@ -39,7 +39,7 @@ namespace PechShop.ViewModels
         [DisplayName("Ссылка")]
         public string Url { get; set; }
         [DisplayName("Доставка за единицу товара")]
-        public decimal TransportatoinCost { get; set; }
+        public decimal TransportationCost { get; set; }
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
         [DisplayName("Всего заказано")]

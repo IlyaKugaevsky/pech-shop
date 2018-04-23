@@ -24,6 +24,9 @@
                 @Html.DisplayNameFor(model => model.AdditionalInfo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TotalOrderedNumber)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.RemainNumber)
             </th>
             <th></th>
@@ -32,33 +35,43 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MinimalNumber)
-                </td>
-                <td>
-                    <a href="@(item.Url)" target="_blank">@(item.Url)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransportatoinCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
-                </td>
-                <td class=@(item.BootstrapColor)>
-                    @Html.DisplayFor(modelItem => item.RemainNumber)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimalNumber)
+            </td>
+            <td>
+                <a href="@(item.Url)" target="_blank">@(item.Url)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportatoinCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalOrderedNumber)
+            </td>
+            <td class=@(item.BootstrapColor)>
+                @Html.DisplayFor(modelItem => item.RemainNumber)
+            </td>
+            <td>
+                <div class="btn-group-vertical">
+                    <a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
                     <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                </td>
-            </tr>
+
+                </div>
+                @*<a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>*@
+            </td>
+        </tr>
         }
     </tbody>
 </table>

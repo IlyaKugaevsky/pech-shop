@@ -23,27 +23,32 @@ namespace PechShop.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var procucts = await _context.Products.Include(p => p.Orders).ToListAsync();
-            var viewModels = procucts.Select(p => new ProductViewModel(p, p.MinimalNumber - p.Orders.Select(o => o.ProductsNumber).Sum())).ToList();
+            var products = await _context.Products.Include(p => p.Orders).ToListAsync();
+            var viewModels = new List<ProductViewModel>();
+
+            foreach (var product in products)
+            {
+                var totalOrderedNumber = product.Orders.Select(o => o.ProductsNumber).Sum();
+                var remainNumber = product.MinimalNumber - totalOrderedNumber;
+                viewModels.Add(new ProductViewModel(product, totalOrderedNumber, remainNumber));
+            }
             return View(viewModels);
         }
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ShowOrders(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var product = await _context.Products.Include(p => p.Orders).ThenInclude(o => o.Customer).SingleOrDefaultAsync(p => p.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(new ProductOrdersViewModel(product, product.Orders));
         }
 
         // GET: Products/Create

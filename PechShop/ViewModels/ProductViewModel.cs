@@ -13,7 +13,7 @@ namespace PechShop.ViewModels
         {
             
         }
-        public ProductViewModel(Product product, int remainNumber)
+        public ProductViewModel(Product product, int totalOrderedNumber, int remainNumber)
         {
             Id = product.Id;
             Name = product.Name;
@@ -22,6 +22,7 @@ namespace PechShop.ViewModels
             Url = product.Url;
             TransportatoinCost = product.TransportatoinCost;
             AdditionalInfo = product.AdditionalInfo;
+            TotalOrderedNumber = totalOrderedNumber;
             RemainNumber = remainNumber;
 
             BootstrapColor = RemainNumber > 0 ? "danger" : "success";
@@ -41,6 +42,8 @@ namespace PechShop.ViewModels
         public decimal TransportatoinCost { get; set; } = 0;
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
+        [DisplayName("Всего заказано")]
+        public int TotalOrderedNumber { get; set; }
         [DisplayName("Остаток")]
         public int RemainNumber { get; set; }
 

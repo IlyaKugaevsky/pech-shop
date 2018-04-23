@@ -29,7 +29,6 @@ namespace PechShop.Controllers
             return View(viewModels);
         }
 
-        // GET: Customers/Details/5
         public async Task<IActionResult> ShowOrders(int? id)
         {
             if (id == null)

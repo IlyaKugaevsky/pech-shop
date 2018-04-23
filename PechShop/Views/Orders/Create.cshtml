@@ -18,7 +18,7 @@
             
             <div class="form-group">
                 <label asp-for="SelectedProductId" class="control-label"></label>
-                @Html.DropDownListFor(model => model.SelectedProductId, Model.ProductList, new {@class="form-control" })
+                @Html.DropDownListFor(model => model.SelectedProductId, Model.ProductList, new {@class="form-control", onchange = "handleProductIdSelect()", id = "productIdSelect"})
                 <span asp-validation-for="SelectedProductId" class="text-danger"></span>
             </div>
 

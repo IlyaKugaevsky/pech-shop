@@ -1,8 +1,8 @@
-﻿@model PechShop.ViewModels.CustomerOrdersViewModel
+﻿@model PechShop.ViewModels.ProductOrdersViewModel
 
 <h2>Заказы</h2>
 <h3>
-    @Html.DisplayFor(modelItem => modelItem.FullName)
+    @Html.DisplayFor(modelItem => modelItem.ProductName)
 </h3>
 
 @if (Model.Orders.Any())
@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>
-                    Товар
+                    Покупатель
                 </th>
                 <th>
                     Количество
@@ -27,7 +27,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ProductName)
+                        @Html.DisplayFor(modelItem => item.CustomerName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProductsNumber)
@@ -36,10 +36,8 @@
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        <div class="btn-group-vertical">
-                            <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
-                            <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
-                        </div>
+                        <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                        <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
                     </td>
                 </tr>
             }

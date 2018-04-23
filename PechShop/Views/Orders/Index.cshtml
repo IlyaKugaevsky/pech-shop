@@ -37,8 +37,10 @@
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                    <div class="btn-group-vertical">
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                    </div>
                 </td>
             </tr>
         }

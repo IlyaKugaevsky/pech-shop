@@ -65,11 +65,8 @@
                     <a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
                     <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-
+                    <a class="btn btn-danger" asp-action="RollbackOrdersWithProduct" asp-route-id="@item.Id">Отменить все заказы</a>
                 </div>
-                @*<a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
-                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>*@
             </td>
         </tr>
         }

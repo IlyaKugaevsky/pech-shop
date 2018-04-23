@@ -35,6 +35,44 @@ namespace PechShop.Controllers
             return View(viewModels);
         }
 
+        public async Task<IActionResult> RollbackOrdersWithProduct(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Products
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RollbackOrdersWithProductConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Products.Include(p => p.Orders).SingleOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _context.RemoveRange(product.Orders);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+
         public async Task<IActionResult> ShowOrders(int? id)
         {
             if (id == null)

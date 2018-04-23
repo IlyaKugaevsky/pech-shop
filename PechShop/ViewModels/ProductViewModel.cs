@@ -1,15 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using PechShop.Models;
 
-namespace PechShop.Models
+namespace PechShop.ViewModels
 {
-    public class Product
+    public class ProductViewModel
     {
-        [Key]
+        public ProductViewModel()
+        {
+            
+        }
+        public ProductViewModel(Product product, int remainNumber)
+        {
+            Id = product.Id;
+            Name = product.Name;
+            Price = product.Price;
+            MinimalNumber = product.MinimalNumber;
+            Url = product.Url;
+            TransportatoinCost = product.TransportatoinCost;
+            AdditionalInfo = product.AdditionalInfo;
+            RemainNumber = remainNumber;
+
+            BootstrapColor = RemainNumber > 0 ? "danger" : "success";
+        }
+
         public int Id { get; set; }
 
         [DisplayName("Наименование")]
@@ -24,8 +41,9 @@ namespace PechShop.Models
         public decimal TransportatoinCost { get; set; } = 0;
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
+        [DisplayName("Остаток")]
+        public int RemainNumber { get; set; }
 
-
-        public List<Order> Orders { get; set; }
+        public string BootstrapColor { get; }
     }
 }

@@ -25,6 +25,6 @@ namespace PechShop.Models
         public List<Order> Orders { get; set; }
 
         public string GetFullName() => string.Join(' ', FirstName, LastName);
-        public double GetTotalMoney() => Orders.Select(o => o.ProductsNumber * o.Product.Price).Sum();
+        public decimal GetTotalMoney() => Orders.Select(o => o.ProductsNumber * o.Product.Price).Sum();
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PechShop.Models.Product>
+﻿@model IEnumerable<PechShop.ViewModels.ProductViewModel>
 
 <h2>Товары</h2>
 
@@ -16,6 +16,15 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportatoinCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RemainNumber)
             </th>
             <th></th>
         </tr>
@@ -35,6 +44,15 @@
                 </td>
                 <td>
                     <a href="@(item.Url)" target="_blank">@(item.Url)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportatoinCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                </td>
+                <td class=@(item.BootstrapColor)>
+                    @Html.DisplayFor(modelItem => item.RemainNumber)
                 </td>
                 <td>
                     <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>

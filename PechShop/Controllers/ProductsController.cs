@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PechShop.Data;
 using PechShop.Models;
+using PechShop.ViewModels;
 
 namespace PechShop.Controllers
 {
@@ -22,7 +23,9 @@ namespace PechShop.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var procucts = await _context.Products.Include(p => p.Orders).ToListAsync();
+            var viewModels = procucts.Select(p => new ProductViewModel(p, p.MinimalNumber - p.Orders.Select(o => o.ProductsNumber).Sum())).ToList();
+            return View(viewModels);
         }
 
         // GET: Products/Details/5

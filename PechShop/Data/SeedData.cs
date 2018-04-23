@@ -24,9 +24,11 @@ namespace PechShop.Data
                     new Product()
                     {
                         Name = "Хлеб",
-                        MinimalNumber = 50,
+                        MinimalNumber = 3,
                         Price = 10000,
-                        Url = "https://sports.ru"
+                        Url = "https://sports.ru",
+                        TransportatoinCost = (decimal) 25.4,
+                        AdditionalInfo = "Старый, невкусный"
                     },
 
                     new Product()
@@ -35,7 +37,16 @@ namespace PechShop.Data
                         MinimalNumber = 2,
                         Price = 1,
                         Url = "https://yandex.ru"
+                    },
+                    new Product()
+                    {
+                        Name = "Жвачка",
+                        MinimalNumber = 20,
+                        Price = (decimal) 0.5,
+                        TransportatoinCost = (decimal)1000,
+                        Url = "https://google.com"
                     }
+
                 );
 
                 context.Customers.AddRange(
@@ -63,15 +74,9 @@ namespace PechShop.Data
                     },
                     new Order()
                     {
-                        CustomerId = 1,
-                        ProductId = 1,
-                        ProductsNumber = 3
-                    },
-                    new Order()
-                    {
-                        CustomerId = 1,
-                        ProductId = 1,
-                        ProductsNumber = 3
+                        CustomerId = 2,
+                        ProductId = 2,
+                        ProductsNumber = 1000
                     }
                 );
 

@@ -31,7 +31,7 @@ namespace PechShop.ViewModels
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
         [DisplayName("Заказано на сумму")]
-        public double TotalMoney { get; set; }
+        public decimal TotalMoney { get; set; }
 
         public List<Order> Orders;
 

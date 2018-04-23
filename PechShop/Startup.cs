@@ -30,11 +30,11 @@ namespace PechShop
             //services.AddDbContext<PechShopContext>(options =>
             //        options.UseSqlite("Data Source=pech_shop.db"));
 
-            //services.AddDbContext<PechShopContext>(options =>
-            //    options.UseInMemoryDatabase("database"));
-
             services.AddDbContext<PechShopContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PechShopContext")));
+                options.UseInMemoryDatabase("database"));
+
+            //services.AddDbContext<PechShopContext>(options =>
+            //    options.UseNpgsql(Configuration.GetConnectionString("PechShopContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

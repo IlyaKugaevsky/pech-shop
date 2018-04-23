@@ -18,6 +18,7 @@ namespace PechShop.ViewModels
         {
             OrderId = order.Id;
             ProductName = order.Product.Name;
+            Date = order.Date;
             ProductPrice = order.Product.Price;
             TransportationCost = order.Product.TransportatoinCost;
             TotalOrderedNumber = order.ProductsNumber;

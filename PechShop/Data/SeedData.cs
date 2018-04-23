@@ -17,7 +17,7 @@ namespace PechShop.Data
             {
                 if (context.Products.Any() || context.Customers.Any() || context.Orders.Any())
                 {
-                    return;   // DB has been seeded
+                    return;
                 }
 
                 context.Products.AddRange(
@@ -26,7 +26,7 @@ namespace PechShop.Data
                         Name = "Хлеб",
                         MinimalNumber = 50,
                         Price = 10000,
-                        Url = "sports.ru"
+                        Url = "https://sports.ru"
                     },
 
                     new Product()
@@ -34,7 +34,7 @@ namespace PechShop.Data
                         Name = "Водка",
                         MinimalNumber = 2,
                         Price = 1,
-                        Url = "yandex.ru"
+                        Url = "https://yandex.ru"
                     }
                 );
 
@@ -51,6 +51,27 @@ namespace PechShop.Data
                         FirstName = "Иван",
                         LastName = "Иванов",
                         AdditionalInfo = "Боится трехколесных велосипедов"
+                    }
+                );
+
+                context.Orders.AddRange(
+                    new Order()
+                    {
+                        CustomerId = 1,
+                        ProductId = 1,
+                        ProductsNumber = 3
+                    },
+                    new Order()
+                    {
+                        CustomerId = 1,
+                        ProductId = 1,
+                        ProductsNumber = 3
+                    },
+                    new Order()
+                    {
+                        CustomerId = 1,
+                        ProductId = 1,
+                        ProductsNumber = 3
                     }
                 );
 

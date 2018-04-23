@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PechShop.Data;
 using PechShop.Models;
+using PechShop.ViewModels;
 
 namespace PechShop.Controllers
 {
@@ -17,67 +18,32 @@ namespace PechShop.Controllers
         public CustomersController(PechShopContext context)
         {
             _context = context;
-
-
-            //context.Products.AddRange(
-            //    new Product()
-            //    {
-            //        Name = "Хлеб",
-            //        MinimalNumber = 50,
-            //        Price = 10000,
-            //        Url = "sports.ru"
-            //    },
-
-            //    new Product()
-            //    {
-            //        Name = "Водка",
-            //        MinimalNumber = 2,
-            //        Price = 1,
-            //        Url = "yandex.ru"
-            //    }
-            //);
-
-            //context.Customers.AddRange(
-            //    new Customer()
-            //    {
-            //        FirstName = "Автандил",
-            //        LastName = "Муштантоид-Рыкин",
-            //        AdditionalInfo = "Играет на скрипке"
-            //    },
-
-            //    new Customer()
-            //    {
-            //        FirstName = "Иван",
-            //        LastName = "Иванов",
-            //        AdditionalInfo = "Боится трехколесных велосипедов"
-            //    }
-            //);
-
             context.SaveChanges();
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            var customers = await _context.Customers.Include(c => c.Orders).ThenInclude(o => o.Product).ToListAsync();
+            var viewModels = customers.Select(c => new CustomerViewModel(c));
+            return View(viewModels);
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ShowOrders(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var customer = await _context.Customers.Include(c => c.Orders).ThenInclude(o => o.Product).SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(new CustomerOrdersViewModel(new CustomerViewModel(customer), customer.Orders));
         }
 
         // GET: Customers/Create

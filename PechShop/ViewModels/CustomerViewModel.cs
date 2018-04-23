@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PechShop.Models;
 
-namespace PechShop.Models
+namespace PechShop.ViewModels
 {
-    public class Customer
+    public class CustomerViewModel
     {
-        [Key]
+        public CustomerViewModel(Customer customer)
+        {
+            Id = customer.Id;
+            FirstName = customer.FirstName;
+            LastName = customer.LastName;
+            PhoneNumber = customer.PhoneNumber;
+            AdditionalInfo = customer.AdditionalInfo;
+            TotalMoney = customer.GetTotalMoney();
+        }
+
+
         public int Id { get; set; }
 
         [DisplayName("Имя")]
@@ -21,10 +30,12 @@ namespace PechShop.Models
         public string PhoneNumber { get; set; }
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
+        [DisplayName("Заказано на сумму")]
+        public double TotalMoney { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders;
 
         public string GetFullName() => string.Join(' ', FirstName, LastName);
-        public double GetTotalMoney() => Orders.Select(o => o.ProductsNumber * o.Product.Price).Sum();
+
     }
 }

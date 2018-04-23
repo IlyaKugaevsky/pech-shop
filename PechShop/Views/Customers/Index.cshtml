@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PechShop.Models.Customer>
+﻿@model IEnumerable<PechShop.ViewModels.CustomerViewModel>
 
 <h2>Покупатели</h2>
 
@@ -17,6 +17,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AdditionalInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalMoney)
             </th>
             <th></th>
         </tr>
@@ -38,6 +41,10 @@
                     @Html.DisplayFor(modelItem => item.AdditionalInfo)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.TotalMoney)
+                </td>
+                <td>
+                    <a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
                     <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
                 </td>

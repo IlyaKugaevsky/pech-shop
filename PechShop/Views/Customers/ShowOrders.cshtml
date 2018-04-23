@@ -1,0 +1,54 @@
+﻿@model PechShop.ViewModels.CustomerOrdersViewModel
+
+<h2>Заказы</h2>
+<h3>
+    @Html.DisplayFor(modelItem => modelItem.FullName)
+</h3>
+
+@if (Model.Orders.Any())
+{
+    <div class="panel">
+        @*<div class="page-header">
+            @Html.DisplayFor(modelItem => modelItem.FullName)
+        </div>*@
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Товар
+                    </th>
+                    <th>
+                       Количество
+                    </th>
+                    <th>
+                        Дата
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductsNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                            <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+}

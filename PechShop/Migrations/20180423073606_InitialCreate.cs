@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace PechShop.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     AdditionalInfo = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -29,10 +30,12 @@ namespace PechShop.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    AdditionalInfo = table.Column<string>(nullable: true),
                     MinimalNumber = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    TransportatoinCost = table.Column<decimal>(nullable: false),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -45,7 +48,7 @@ namespace PechShop.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CustomerId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),

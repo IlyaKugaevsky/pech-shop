@@ -11,13 +11,14 @@ using System;
 namespace PechShop.Migrations
 {
     [DbContext(typeof(PechShopContext))]
-    [Migration("20180422113851_InitialCreate")]
+    [Migration("20180423073606_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("PechShop.Models.Customer", b =>
@@ -65,11 +66,15 @@ namespace PechShop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdditionalInfo");
+
                     b.Property<int>("MinimalNumber");
 
                     b.Property<string>("Name");
 
-                    b.Property<double>("Price");
+                    b.Property<decimal>("Price");
+
+                    b.Property<decimal>("TransportatoinCost");
 
                     b.Property<string>("Url");
 
@@ -81,7 +86,7 @@ namespace PechShop.Migrations
             modelBuilder.Entity("PechShop.Models.Order", b =>
                 {
                     b.HasOne("PechShop.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
 

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PechShop.Models
 {
@@ -21,7 +23,7 @@ namespace PechShop.Models
         [DisplayName("Ссылка")]
         public string Url { get; set; }
         [DisplayName("Доставка за единицу товара")]
-        public decimal TransportatoinCost { get; set; } = 0;
+        public decimal TransportatoinCost { get; set; }
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
 

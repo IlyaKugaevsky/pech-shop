@@ -39,7 +39,7 @@ namespace PechShop.ViewModels
         [DisplayName("Ссылка")]
         public string Url { get; set; }
         [DisplayName("Доставка за единицу товара")]
-        public decimal TransportatoinCost { get; set; } = 0;
+        public decimal TransportatoinCost { get; set; }
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
         [DisplayName("Всего заказано")]

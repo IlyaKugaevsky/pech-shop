@@ -33,3 +33,11 @@
         display: none;
     }
 }
+
+.dataTables_filter {
+    float: left !important;
+}
+
+.pull-left{
+    float: left !important;
+}

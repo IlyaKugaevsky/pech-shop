@@ -60,7 +60,7 @@ namespace PechShop.Controllers
                     orderForCustomerToCreateViewModel.CustomerId,
                     orderForCustomerToCreateViewModel.ProductsNumber);
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(ShowOrders), new { customerId  = orderForCustomerToCreateViewModel.CustomerId });
             }
             return View(orderForCustomerToCreateViewModel);
         }

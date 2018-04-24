@@ -9,9 +9,12 @@ namespace PechShop.ViewModels
 {
     public class ProductOrdersViewModel
     {
+
+        private string TrimName(string name, int length) => name.Length <= length ? name : (name.Substring(0, length - 3)) + "...";
+
         public ProductOrdersViewModel(Product product, IEnumerable<Order> orders)
         {
-            ProductName = product.Name;
+            ProductName = TrimName(product.Name, 20);
             Orders = orders.Select(o => new OrderViewModel(o)).ToList();
             //Price = product.Price;
             //MinimalNumber = product.MinimalNumber;

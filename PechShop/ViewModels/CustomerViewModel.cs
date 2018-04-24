@@ -35,7 +35,6 @@ namespace PechShop.ViewModels
 
         public List<Order> Orders;
 
-        public string GetFullName() => string.Join(' ', FirstName, LastName);
-
+        public string GetFullName() => string.Join(' ', LastName, FirstName);
     }
 }

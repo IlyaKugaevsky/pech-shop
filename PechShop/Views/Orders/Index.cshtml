@@ -2,52 +2,72 @@
 
 <h2>Заказы</h2>
 
-<table class="table" id="orders">
+<table class="table cell-border hover" id="orders">
     <thead>
-        <tr>
-            <th>
-                Товар
-            </th>
-            <th>
-                Покупатель
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductsNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
-            </th>
-        </tr>
+    <tr>
+        <th>
+            Товар
+        </th>
+        <th>
+            Покупатель
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductsNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductsNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    <div class="btn-group-vertical btn-block">
-                        <a class="btn  btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
-                    </div>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="word-wrap: break-word;max-width: 160px;">
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductsNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <div class="btn-group-vertical btn-block">
+                    <a class="btn  btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                </div>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+
+<style>
+    .dataTables_wrapper .myfilter .dataTables_filter {
+        float:left
+    }
+    .dataTables_wrapper .mylength .dataTables_length {
+        float:right
+    }
+</style>
+@*<script>
+    $(document).ready( function () {
+        var table = $('#example').DataTable({
+     
+            dom:"<'myfilter'f><'mylength'l>t"
+   
+        });
+    } );
+ 
+</script>*@
+
 
 @section Scripts {
     <script type="text/javascript" charset="utf8" src="~/lib/data-tables/datatables.min.js"></script>
@@ -56,9 +76,18 @@
         $(document).ready(function () {
             $('#orders').DataTable({
                 paging: false,
-                searching: false,
-                info: false
+                searching: true,
+                info: false,
+                language: {
+                    "search": "",
+                    "zeroRecords": "Записи отсутствуют."
+                },
+                //dom:"<'myfilter'f><'mylength'l>t"
+
             });
+            $("input[type=search]").addClass("form-control").addClass("pull-left");
         });
     </script>
+    
+
 }

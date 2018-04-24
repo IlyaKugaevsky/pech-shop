@@ -9,17 +9,24 @@ namespace PechShop.ViewModels
 {
     public class ProductViewModel
     {
+        private string TrimUrl(string url, int length) => url.Length <= length ? url : (url.Substring(0, length - 3)) + "...";
+
         public ProductViewModel()
         {
             
         }
+
         public ProductViewModel(Product product, int totalOrderedNumber, int remainNumber)
         {
             Id = product.Id;
             Name = product.Name;
             Price = product.Price;
             MinimalNumber = product.MinimalNumber;
-            Url = product.Url;
+            if (product.Url != null)
+            {
+                Url = product.Url ?? TrimUrl(product.Url, 20);
+            }
+
             TransportationCost = product.TransportationCost;
             AdditionalInfo = product.AdditionalInfo;
             TotalOrderedNumber = totalOrderedNumber;

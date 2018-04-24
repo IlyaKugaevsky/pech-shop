@@ -7,7 +7,7 @@
 
 @if (Model.Orders.Any())
 {
-    <table class="table" id="orders">
+    <table class="table cell-border hover" id="orders">
         <thead>
             <tr>
                 <th>
@@ -36,8 +36,11 @@
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
-                        <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                        <div class="btn-group-vertical btn-block">
+                            <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                            <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+
+                        </div>
                     </td>
                 </tr>
             }
@@ -53,9 +56,14 @@
         $(document).ready(function () {
             $('#orders').DataTable({
                 paging: false,
-                searching: false,
-                info: false
+                searching: true,
+                info: false,
+                language: {
+                    "search": "",
+                    "zeroRecords": "Записи отсутствуют."
+                }
             });
+            $("input[type=search]").addClass("form-control");
         });
     </script>
 }

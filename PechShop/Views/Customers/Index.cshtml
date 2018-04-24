@@ -2,44 +2,44 @@
 
 <h2>Покупатели</h2>
 
-<table class="table" id="customers">
+<table class="table cell-border hover" id="customers">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AdditionalInfo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalMoney)
-            </th>
-            <th>
-                <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdditionalInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalMoney)
+        </th>
+        <th>
+            <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
 
-            </th>
-        </tr>
+        </th>
+    </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
+                <td style="word-wrap: break-word;max-width: 160px;">
                     @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td style="word-wrap: break-word;max-width: 160px;">
+                    @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
-                <td>
+                <td style="word-wrap: break-word;max-width: 160px;">
                     @Html.DisplayFor(modelItem => item.AdditionalInfo)
                 </td>
                 <td>
@@ -65,9 +65,14 @@
         $(document).ready(function () {
             $('#customers').DataTable({
                 paging: false,
-                searching: false,
-                info: false
+                searching: true,
+                info: false,
+                language: {
+                    "search": "",
+                    "zeroRecords": "Записи отсутствуют."
+                }
             });
+            $("input[type=search]").addClass("form-control");
         });
     </script>
 }

@@ -2,7 +2,7 @@
 
 <h2>Товары</h2>
 
-<table class="table" id="products">
+<table class="table cell-border hover" id="products">
     <thead>
         <tr>
             <th>
@@ -38,7 +38,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="word-wrap: break-word;max-width: 160px;">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
@@ -47,13 +47,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.MinimalNumber)
                 </td>
-                <td>
+                <td style="word-wrap: break-word;max-width: 160px;">
                     <a href="@(item.Url)" target="_blank">@(item.Url)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TransportationCost)
                 </td>
-                <td>
+                <td style="word-wrap: break-word;max-width: 160px;">
                     @Html.DisplayFor(modelItem => item.AdditionalInfo)
                 </td>
                 <td>
@@ -63,11 +63,11 @@
                     @Html.DisplayFor(modelItem => item.RemainNumber)
                 </td>
                 <td>
-                    <div class="btn-group-vertical btn-block">
+                    <div class="btn-group-vertical">
                         <a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
                         <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                        <a class="btn btn-danger" asp-action="RollbackOrdersWithProduct" asp-route-id="@item.Id">Отменить все заказы</a>
+                        <a class="btn btn-danger" asp-action="RollbackOrdersWithProduct" asp-route-id="@item.Id">Отменить заказы</a>
                     </div>
                 </td>
             </tr>
@@ -82,9 +82,14 @@
         $(document).ready(function () {
             $('#products').DataTable({
                 paging: false,
-                searching: false,
-                info: false
+                searching: true,
+                info: false,
+                language: {
+                    "search": "",
+                    "zeroRecords": "Записи отсутствуют."
+                }
             });
+            $("input[type=search]").addClass("form-control");
         });
     </script>
 }

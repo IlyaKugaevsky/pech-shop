@@ -15,29 +15,29 @@
 
 @if (Model.Orders.Any())
 {
-    <table class="table" id="orders">
+    <table class="table cell-border hover" id="orders">
         <thead>
             <tr>
-                <th>
+                <th style="width: 12.5%">
                     Товар
                 </th>
-                <th>
+                <th style="width: 12.5%">
                     Цена за единицу
                 </th>
-                <th>
+                <th style="width: 12.5%">
                     Доставка за единицу
                 </th>
-                <th>
+                <th style="width: 12.5%">
                     Количество
                 </th>
-                <th>
+                <th style="width: 12.5%">
                     Орг. сбор
                 </th>
-                <th>
+                <th style="width: 12.5%">
                     Итого
                 </th>
                 <th>
-                    <a class="btn btn-block btn-success" align="center" asp-action="CreateOrder" asp-route-customerId="@Model.CustomerId">Создать</a>
+                    <a class="btn btn-block btn-success" asp-action="CreateOrder" asp-route-customerId="@Model.CustomerId">Создать</a>
                 </th>
             </tr>
         </thead>
@@ -45,7 +45,7 @@
             @foreach (var item in Model.Orders)
             {
                 <tr>
-                    <td>
+                    <td style="word-wrap: break-word;max-width: 160px;">
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </td>
                     <td>
@@ -82,8 +82,6 @@
 @Html.HiddenFor(model => model.CustomerId)
 
 
-
-
 @section Scripts {
     <script type="text/javascript" charset="utf8" src="~/lib/data-tables/datatables.min.js"></script>
 
@@ -91,9 +89,15 @@
         $(document).ready(function () {
             $('#orders').DataTable({
                 paging: false,
-                searching: false,
-                info: false
+                searching: true,
+                info: false,
+                language: {
+                    "search": "",
+                    "zeroRecords": "Записи отсутствуют."
+                }
             });
+
+            $("input[type=search]").addClass("form-control");
         });
     </script>
 }

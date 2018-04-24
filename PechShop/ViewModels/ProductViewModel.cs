@@ -9,7 +9,9 @@ namespace PechShop.ViewModels
 {
     public class ProductViewModel
     {
-        private string TrimUrl(string url, int length) => url.Length <= length ? url : (url.Substring(0, length - 3)) + "...";
+        private string TrimUrl(string url, int length) => (url.Length <= length) ? 
+            url : 
+            ((url.Substring(0, length - 3)) + "...");
 
         public ProductViewModel()
         {
@@ -24,7 +26,7 @@ namespace PechShop.ViewModels
             MinimalNumber = product.MinimalNumber;
             if (product.Url != null)
             {
-                Url = product.Url ?? TrimUrl(product.Url, 20);
+                Url = TrimUrl(product.Url, 20);
             }
 
             TransportationCost = product.TransportationCost;

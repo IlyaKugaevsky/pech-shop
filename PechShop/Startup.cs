@@ -25,7 +25,6 @@ namespace PechShop
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -67,14 +66,14 @@ namespace PechShop
 
             app.UseStaticFiles();
 
-            app.UseFileServer(new FileServerOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "wwwroot/node_modules")
-                ),
-                RequestPath = "/node_modules",
-                EnableDirectoryBrowsing = false
-            });
+            //app.UseFileServer(new FileServerOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(env.ContentRootPath, "wwwroot/node_modules")
+            //    ),
+            //    RequestPath = "/node_modules",
+            //    EnableDirectoryBrowsing = false
+            //});
 
             app.UseMvc(routes =>
             {

@@ -7,17 +7,9 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\lib\cldrjs\**" />
-    <Compile Remove="wwwroot\lib\globalize\**" />
-    <Compile Remove="wwwroot\lib\jquery-validation-globalize\**" />
     <Content Remove="wwwroot\lib\cldrjs\**" />
-    <Content Remove="wwwroot\lib\globalize\**" />
-    <Content Remove="wwwroot\lib\jquery-validation-globalize\**" />
     <EmbeddedResource Remove="wwwroot\lib\cldrjs\**" />
-    <EmbeddedResource Remove="wwwroot\lib\globalize\**" />
-    <EmbeddedResource Remove="wwwroot\lib\jquery-validation-globalize\**" />
     <None Remove="wwwroot\lib\cldrjs\**" />
-    <None Remove="wwwroot\lib\globalize\**" />
-    <None Remove="wwwroot\lib\jquery-validation-globalize\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,11 +95,97 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\lib\cldrjs\dist\cldr\" />
-    <Folder Include="wwwroot\lib\globalize\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\cldrjs\dist\cldr.js" />
+    <None Include="wwwroot\lib\cldrjs\dist\cldr\event.js" />
+    <None Include="wwwroot\lib\cldrjs\dist\cldr\supplemental.js" />
+    <None Include="wwwroot\lib\cldrjs\dist\cldr\unresolved.js" />
+    <None Include="wwwroot\lib\cldrjs\dist\node_main.js" />
+    <None Include="wwwroot\lib\globalize\CONTRIBUTING.md" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\currency.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\date.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\message.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\number.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\plural.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\relative-time.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize-runtime\unit.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\currency.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\date.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\message.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\number.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\plural.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\relative-time.js" />
+    <None Include="wwwroot\lib\globalize\dist\globalize\unit.js" />
+    <None Include="wwwroot\lib\globalize\dist\node-main.js" />
+    <None Include="wwwroot\lib\globalize\doc\api\core\constructor.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\core\load.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\core\locale.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\currency\currency-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\date\date-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\date\date-parser.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\date\date-to-parts-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\date\load-iana-time-zone.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\message\load-messages.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\message\message-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\number\number-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\number\number-parser.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\plural\plural-generator.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\relative-time\relative-time-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\api\unit\unit-formatter.md" />
+    <None Include="wwwroot\lib\globalize\doc\cldr.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-default-locale-not-defined.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-invalid-cldr.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-invalid-par-type.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-invalid-par-value.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-missing-cldr.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-missing-parameter.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-missing-plural-module.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-par-missing-key.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-par-out-of-range.md" />
+    <None Include="wwwroot\lib\globalize\doc\error\e-unsupported.md" />
+    <None Include="wwwroot\lib\globalize\doc\migrating-from-0.x.md" />
+    <None Include="wwwroot\lib\globalize\examples\amd-bower\.bowerrc" />
+    <None Include="wwwroot\lib\globalize\examples\amd-bower\.npmignore" />
+    <None Include="wwwroot\lib\globalize\examples\amd-bower\main.js" />
+    <None Include="wwwroot\lib\globalize\examples\amd-bower\README.md" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack-2\.npmignore" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack-2\app\index.js" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack-2\README.md" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack-2\webpack-config.js" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack\.npmignore" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack\app\index.js" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack\README.md" />
+    <None Include="wwwroot\lib\globalize\examples\app-npm-webpack\webpack-config.js" />
+    <None Include="wwwroot\lib\globalize\examples\globalize-compiler\.npmignore" />
+    <None Include="wwwroot\lib\globalize\examples\globalize-compiler\app.js" />
+    <None Include="wwwroot\lib\globalize\examples\globalize-compiler\README.md" />
+    <None Include="wwwroot\lib\globalize\examples\node-npm\main.js" />
+    <None Include="wwwroot\lib\globalize\examples\node-npm\README.md" />
+    <None Include="wwwroot\lib\globalize\examples\plain-javascript\.npmignore" />
+    <None Include="wwwroot\lib\globalize\examples\plain-javascript\README.md" />
+    <None Include="wwwroot\lib\globalize\README.md" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\.npmignore" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\.travis.yml" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\gulpfile.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\jquery.validate.globalize.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\jquery.validate.globalize.min.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\jquery.validate.globalize.min.js.map" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\content\scripts\jquery.validate.globalize.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\content\scripts\jquery.validate.globalize.min.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\content\scripts\jquery.validate.globalize.min.js.map" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\jQuery.Validation.Globalize.1.0.0.nupkg" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\jQuery.Validation.Globalize.1.0.0.nuspec" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\jQuery.Validation.Globalize.1.0.1.nupkg" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\nuget\jQuery.Validation.Globalize.1.0.1.nuspec" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\README.md" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\test\fakes.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\test\qunit\qunit.js" />
+    <None Include="wwwroot\lib\jquery-validation-globalize\test\tests.js" />
     <None Include="wwwroot\node_modules\bootstrap-table\dist\bootstrap-table-locale-all.js" />
     <None Include="wwwroot\node_modules\bootstrap-table\dist\bootstrap-table-locale-all.min.js" />
     <None Include="wwwroot\node_modules\bootstrap-table\dist\bootstrap-table.js" />

@@ -27,7 +27,7 @@ namespace PechShop.Data
                         MinimalNumber = 3,
                         Price = 10000,
                         Url = "https://sports.ru",
-                        TransportatoinCost = (decimal) 25.4,
+                        TransportationCost = (decimal) 25.4,
                         AdditionalInfo = "Старый, невкусный"
                     },
 
@@ -43,7 +43,7 @@ namespace PechShop.Data
                         Name = "Жвачка",
                         MinimalNumber = 20,
                         Price = (decimal) 0.5,
-                        TransportatoinCost = (decimal)1000,
+                        TransportationCost = (decimal)1000,
                         Url = "https://google.com"
                     }
 

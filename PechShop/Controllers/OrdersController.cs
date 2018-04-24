@@ -9,16 +9,19 @@ using PechShop.Data;
 using PechShop.Models;
 using PechShop.ViewModels;
 using PechShop.Heplers;
+using PechShop.Services;
 
 namespace PechShop.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly PechShopContext _context;
+        private readonly OrderService _orderService;
 
         public OrdersController(PechShopContext context)
         {
             _context = context;
+            _orderService = new OrderService(_context);
         }
 
         // GET: Orders
@@ -29,23 +32,6 @@ namespace PechShop.Controllers
             return View(viewModels);
         }
 
-        // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Orders
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
 
         // GET: Orders/Create
         public async Task<IActionResult> Create()
@@ -67,32 +53,38 @@ namespace PechShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var productId = orderToUpdateViewModel.SelectedProductId;
-                var customerId = orderToUpdateViewModel.SelectedCustomerId;
-                var productsNumber = orderToUpdateViewModel.ProductsNumber;
-                var dateTime = DateTime.Now;
+                //var productId = orderToUpdateViewModel.SelectedProductId;
+                //var customerId = orderToUpdateViewModel.SelectedCustomerId;
+                //var productsNumber = orderToUpdateViewModel.ProductsNumber;
+                //var dateTime = DateTime.Now;
 
-                var duplicateOrder = await _context.FindDuplicateOrder(productId, customerId);
+                //var duplicateOrder = await _context.FindDuplicateOrder(productId, customerId);
 
-                if (duplicateOrder == null)
-                {
-                    var order = new Order()
-                    {
-                        CustomerId = customerId,
-                        ProductId = productId,
-                        ProductsNumber = productsNumber,
-                        Date = dateTime
-                    };
+                //if (duplicateOrder == null)
+                //{
+                //    var order = new Order()
+                //    {
+                //        CustomerId = customerId,
+                //        ProductId = productId,
+                //        ProductsNumber = productsNumber,
+                //        Date = dateTime
+                //    };
 
-                    _context.Add(order);
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    duplicateOrder.ProductsNumber += productsNumber;
-                    duplicateOrder.Date = dateTime;
-                    await _context.SaveChangesAsync();
-                }
+                //    _context.Add(order);
+                //    await _context.SaveChangesAsync();
+                //}
+                //else
+                //{
+                //    duplicateOrder.ProductsNumber += productsNumber;
+                //    duplicateOrder.Date = dateTime;
+                //    await _context.SaveChangesAsync();
+                //}
+
+
+                await _orderService.CreateOrder(
+                    orderToUpdateViewModel.SelectedProductId,
+                    orderToUpdateViewModel.SelectedCustomerId, 
+                    orderToUpdateViewModel.ProductsNumber);
 
                 return RedirectToAction("Index");
             }

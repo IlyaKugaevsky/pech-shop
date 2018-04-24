@@ -16,14 +16,23 @@ namespace PechShop.Models
 
         [DisplayName("Наименование")]
         public string Name { get; set; }
+
         [DisplayName("Цена")]
+        [Range(1, 99999999)]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
         [DisplayName("Минимальное количество")]
         public int MinimalNumber { get; set; }
+
         [DisplayName("Ссылка")]
         public string Url { get; set; }
+
         [DisplayName("Доставка за единицу товара")]
-        public decimal TransportatoinCost { get; set; }
+        [Range(0, 99999999)]
+        [DataType(DataType.Currency)]
+        public decimal TransportationCost { get; set; }
+
         [DisplayName("Доп. информация")]
         public string AdditionalInfo { get; set; }
 

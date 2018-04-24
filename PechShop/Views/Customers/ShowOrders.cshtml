@@ -1,68 +1,82 @@
 ﻿@model PechShop.ViewModels.CustomerOrdersViewModel
 
+<style>
+    .result {
+        font-size: 20px;
+    }
+</style>
+
 <h2>Заказы</h2>
 <h3>
     @Html.DisplayFor(modelItem => modelItem.FullName)
 </h3>
 
+@Html.HiddenFor(model => model.CustomerId)
+
 @if (Model.Orders.Any())
 {
     <table class="table">
         <thead>
-        <tr>
-            <th>
-                Дата заказа
-            </th>
-            <th>
-                Товар
-            </th>
-            <th>
-                Цена за единицу
-            </th>
-            <th>
-                Доставка за единицу
-            </th>
-            <th>
-                Всего заказано
-            </th>
-            <th>
-                Заказано на сумму
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    Товар
+                </th>
+                <th>
+                    Цена за единицу
+                </th>
+                <th>
+                    Доставка за единицу
+                </th>
+                <th>
+                    Количество
+                </th>
+                <th>
+                    Орг. сбор
+                </th>
+                <th>
+                    Итого
+                </th>
+                <th>
+                    <a class="btn btn-block btn-success" align="center" asp-action="CreateOrder" asp-route-customerId="@Model.CustomerId">Создать</a>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model.Orders)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransportationCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalOrderedNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalOrderedSum)
-                </td>
-                <td>
-                    <div class="btn-group-vertical">
-                        <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
-                        <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
-                    </div>
-                </td>
-            </tr>
-        }
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportationCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalOrderedNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrganizationCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalOrderedSum)
+                    </td>
+                    <td>
+                        <div class="btn-group-vertical btn-block">
+                            <a class="btn btn-info" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                            <a class="btn btn-danger" asp-controller="Orders" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 
-    <p><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
-
+    <div class="row">
+        <p class="result bg-info" align="right"><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
+    </div>
 }
+
+@Html.HiddenFor(model => model.CustomerId)

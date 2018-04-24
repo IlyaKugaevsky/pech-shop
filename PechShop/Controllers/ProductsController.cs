@@ -100,8 +100,14 @@ namespace PechShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,MinimalNumber,Url")] Product product)
+        public async Task<IActionResult> Create([Bind("Name,Price,MinimalNumber, TransportationCost, Url")] Product product)
         {
+            var duplicateProduct = await _context.Products.SingleOrDefaultAsync(p => p.Name == product.Name);
+            if (duplicateProduct != null)
+            {
+                ModelState.AddModelError("Name", "Такой товар уже существует");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -132,7 +138,7 @@ namespace PechShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,MinimalNumber,Url")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,MinimalNumber,TransportationCost,Url")] Product product)
         {
             if (id != product.Id)
             {

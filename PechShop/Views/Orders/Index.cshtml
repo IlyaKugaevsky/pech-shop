@@ -4,21 +4,23 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            Товар
-        </th>
-        <th>
-            Покупатель
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductsNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                Товар
+            </th>
+            <th>
+                Покупатель
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductsNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
+            </th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -37,8 +39,8 @@
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    <div class="btn-group-vertical">
-                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
+                    <div class="btn-group-vertical btn-block">
+                        <a class="btn  btn-info" asp-action="Edit" asp-route-id="@item.OrderId">Редактировать</a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderId">Удалить</a>
                     </div>
                 </td>
@@ -46,6 +48,3 @@
         }
     </tbody>
 </table>
-
-<a class="btn btn-success" asp-action="Create">Создать</a>
-

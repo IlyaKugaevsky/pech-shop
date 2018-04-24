@@ -1,0 +1,46 @@
+﻿@model PechShop.ViewModels.OrderForCustomerToCreateViewModel
+
+<h2>Создать</h2>
+
+<h4>Заказ</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(model => model.CustomerId)
+
+
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" disabled="" />
+                @*<span asp-validation-for="SelectedCustomerId" class="text-danger"></span>*@
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SelectedProductId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.SelectedProductId, Model.ProductList, new { @class = "form-control", onchange = "handleProductIdSelect()", id = "productIdSelect" })
+                <span asp-validation-for="SelectedProductId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductsNumber" class="control-label"></label>
+                <input asp-for="ProductsNumber" type="number" class="form-control" />
+                <span asp-validation-for="ProductsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="Index">Назад к списку заказов</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

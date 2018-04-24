@@ -20,7 +20,7 @@ namespace PechShop.ViewModels
             Price = product.Price;
             MinimalNumber = product.MinimalNumber;
             Url = product.Url;
-            TransportationCost = product.TransportatoinCost;
+            TransportationCost = product.TransportationCost;
             AdditionalInfo = product.AdditionalInfo;
             TotalOrderedNumber = totalOrderedNumber;
             RemainNumber = remainNumber;

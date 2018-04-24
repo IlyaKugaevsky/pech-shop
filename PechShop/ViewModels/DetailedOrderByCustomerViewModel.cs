@@ -16,13 +16,16 @@ namespace PechShop.ViewModels
 
         public DetailedOrderByCustomerViewModel(Order order)
         {
+
             OrderId = order.Id;
             ProductName = order.Product.Name;
             Date = order.Date;
             ProductPrice = order.Product.Price;
-            TransportationCost = order.Product.TransportatoinCost;
+            TransportationCost = order.Product.TransportationCost;
             TotalOrderedNumber = order.ProductsNumber;
-            TotalOrderedSum = (ProductPrice + TransportationCost) * TotalOrderedNumber;
+            OrganizationCost = TotalOrderedNumber * ProductPrice * (decimal)0.1;
+            TotalOrderedSum = (ProductPrice + TransportationCost) * TotalOrderedNumber + OrganizationCost;
+
         }
 
         [DisplayName("Номер заказа")]
@@ -35,6 +38,8 @@ namespace PechShop.ViewModels
         public decimal ProductPrice { get; set; }
         [DisplayName("Доставка за единицу товара")]
         public decimal TransportationCost { get; set; }
+        [DisplayName("Орг. сбор")]
+        public decimal OrganizationCost { get; set; }
         [DisplayName("Всего заказано")]
         public int TotalOrderedNumber { get; set; }
         [DisplayName("Заказано на сумму")]

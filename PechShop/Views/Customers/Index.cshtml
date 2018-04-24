@@ -2,7 +2,6 @@
 
 <h2>Покупатели</h2>
 
-
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +20,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.TotalMoney)
             </th>
-            <th></th>
+            <th>
+                <a class="btn btn-block btn-success" align="center" asp-action="Create">Создать</a>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -44,8 +46,8 @@
                     @Html.DisplayFor(modelItem => item.TotalMoney)
                 </td>
                 <td>
-                    <div class="btn-group-vertical">
-                        <a class="btn btn-default" asp-action="ShowOrders" asp-route-id="@item.Id">Заказы</a>
+                    <div class="btn-group-vertical btn-block">
+                        <a class="btn btn-default" asp-action="ShowOrders" asp-route-customerId="@item.Id">Заказы</a>
                         <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
 
@@ -55,5 +57,3 @@
         }
     </tbody>
 </table>
-
-<a class="btn btn-success" asp-action="Create">Создать</a>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PechShop.Data;
 using PechShop.Models;
+using PechShop.Services;
 using PechShop.ViewModels;
 
 namespace PechShop.Controllers
@@ -14,11 +15,12 @@ namespace PechShop.Controllers
     public class CustomersController : Controller
     {
         private readonly PechShopContext _context;
+        private readonly OrderService _orderService;
 
         public CustomersController(PechShopContext context)
         {
             _context = context;
-            context.SaveChanges();
+            _orderService = new OrderService(_context);
         }
 
         // GET: Customers
@@ -29,14 +31,47 @@ namespace PechShop.Controllers
             return View(viewModels);
         }
 
-        public async Task<IActionResult> ShowOrders(int? id)
+        public async Task<IActionResult> CreateOrder(int? customerId)
         {
-            if (id == null)
+            if (customerId == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.Include(c => c.Orders).ThenInclude(o => o.Product).SingleOrDefaultAsync(m => m.Id == id);
+            var customer = await _context.Customers.SingleOrDefaultAsync(m => m.Id == customerId);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var products = await _context.Products.ToListAsync();
+
+            return View(new OrderForCustomerToCreateViewModel(customer, products));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateOrder([Bind("SelectedProductId, CustomerId, ProductsNumber")] OrderForCustomerToCreateViewModel orderForCustomerToCreateViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await _orderService.CreateOrder(
+                    orderForCustomerToCreateViewModel.SelectedProductId,
+                    orderForCustomerToCreateViewModel.CustomerId,
+                    orderForCustomerToCreateViewModel.ProductsNumber);
+
+                return RedirectToAction("Index");
+            }
+            return View(orderForCustomerToCreateViewModel);
+        }
+
+        public async Task<IActionResult> ShowOrders(int? customerId)
+        {
+            if (customerId == null)
+            {
+                return NotFound();
+            }
+            var customer = await _context.Customers.Include(c => c.Orders).ThenInclude(o => o.Product).SingleOrDefaultAsync(m => m.Id == customerId);
             if (customer == null)
             {
                 return NotFound();
@@ -45,15 +80,11 @@ namespace PechShop.Controllers
             return View(new CustomerOrdersViewModel(new CustomerViewModel(customer), customer.Orders));
         }
 
-        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,AdditionalInfo")] Customer customer)
@@ -67,7 +98,6 @@ namespace PechShop.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,9 +113,7 @@ namespace PechShop.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PhoneNumber,AdditionalInfo")] Customer customer)
@@ -118,7 +146,6 @@ namespace PechShop.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +163,6 @@ namespace PechShop.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

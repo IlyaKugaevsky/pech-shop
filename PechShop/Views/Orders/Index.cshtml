@@ -2,7 +2,7 @@
 
 <h2>Заказы</h2>
 
-<table class="table">
+<table class="table" id="orders">
     <thead>
         <tr>
             <th>
@@ -48,3 +48,17 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#orders').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+        });
+    </script>
+}

@@ -2,7 +2,7 @@
 
 <h2>Покупатели</h2>
 
-<table class="table">
+<table class="table" id="customers">
     <thead>
         <tr>
             <th>
@@ -57,3 +57,17 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#customers').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+        });
+    </script>
+}

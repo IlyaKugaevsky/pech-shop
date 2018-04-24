@@ -15,7 +15,7 @@
 
 @if (Model.Orders.Any())
 {
-    <table class="table">
+    <table class="table" id="orders">
         <thead>
             <tr>
                 <th>
@@ -75,8 +75,25 @@
     </table>
 
     <div class="row">
-        <p class="result bg-info" align="right"><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
+        <p class="result" align="right"><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
     </div>
 }
 
 @Html.HiddenFor(model => model.CustomerId)
+
+
+
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#orders').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+        });
+    </script>
+}

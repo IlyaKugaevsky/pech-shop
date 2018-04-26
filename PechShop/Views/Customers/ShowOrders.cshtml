@@ -17,6 +17,9 @@
 {
     <table class="table cell-border hover" id="orders">
         <thead>
+                <div class="row">
+        <p class="result" align="right"><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
+    </div>
             <tr>
                 <th style="width: 12.5%">
                     Товар
@@ -73,10 +76,6 @@
             }
         </tbody>
     </table>
-
-    <div class="row">
-        <p class="result" align="right"><b>Сумма по всем заказам:</b> @Model.TotalOrderedSum</p>
-    </div>
 }
 
 @Html.HiddenFor(model => model.CustomerId)

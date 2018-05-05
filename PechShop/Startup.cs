@@ -32,12 +32,11 @@ namespace PechShop
             //services.AddDbContext<PechShopContext>(options =>
             //        options.UseSqlite("Data Source=pech_shop.db"));
 
+            // services.AddDbContext<PechShopContext>(options =>
+            //     options.UseInMemoryDatabase("database"));
+
             services.AddDbContext<PechShopContext>(options =>
-                options.UseInMemoryDatabase("database"));
-
-            //services.AddDbContext<PechShopContext>(options =>
-            //    options.UseNpgsql(Configuration.GetConnectionString("PechShopContext")));
-
+               options.UseNpgsql(Configuration.GetConnectionString("PechShopContext")));
            
         }
 

@@ -11,9 +11,10 @@ using System;
 namespace PechShop.Migrations
 {
     [DbContext(typeof(PechShopContext))]
-    partial class PechShopContextModelSnapshot : ModelSnapshot
+    [Migration("20180505155258_TransportationCost")]
+    partial class TransportationCost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

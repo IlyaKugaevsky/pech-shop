@@ -138,7 +138,7 @@ namespace PechShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,MinimalNumber,TransportationCost,Url")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,MinimalNumber,TransportationCost,Url,AdditionalInfo")] Product product)
         {
             if (id != product.Id)
             {
@@ -165,7 +165,7 @@ namespace PechShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Delete/5

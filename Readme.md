@@ -2,4 +2,4 @@ Web app for managing personal business-related stuff. Simply speaking, bunch of 
 
 
 
-<img src="PechShop/Data/pech-shop.png" width="800">
+<img src="PechShop/Data/pech-shop.png">
